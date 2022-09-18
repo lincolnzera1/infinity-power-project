@@ -1,0 +1,66 @@
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center; 
+    
+    padding-bottom: 180px; /* Pra compensar o padding da logo*/
+    
+}
+
+.child{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type=text]{
+    width: 400px;
+    height: 48px;
+    margin-bottom: 20px;
+    padding-top: 9px;
+
+    background-color: #264ECA;
+    border: 2px solid white;
+}
+
+::placeholder{
+    font-size: 23px;
+    font-weight: bold;
+
+    padding-left: 50px;
+    color: white;
+
+}
+
+.icon-input{
+    position: absolute;
+    left: 0;
+    top: 5px;
+    margin-left: 4px;
+}
+
+.inputs{
+    position: relative;
+}
+
+input[type=submit] {
+    width: 400px;
+    height: 48px;
+    margin-top: 30px;
+    font-size: 24px;
+    color: #264ECA;
+}
+
+a {
+    align-self: flex-end;
+    text-decoration: none;
+}
+a p{
+    color: white;
+    font-size: 24px;
+}
