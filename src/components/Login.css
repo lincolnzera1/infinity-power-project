@@ -18,7 +18,7 @@
     justify-content: center;
 }
 
-input[type=text]{
+input[type=text], input[type=password]{
     width: 400px;
     height: 48px;
     margin-bottom: 20px;
@@ -26,13 +26,19 @@ input[type=text]{
 
     background-color: #264ECA;
     border: 2px solid white;
+    border-radius: 4px;
+
+    font-size: 23px;
+    font-weight: bold;
+
+    padding-left: 50px;
+    color: white;
 }
 
 ::placeholder{
     font-size: 23px;
     font-weight: bold;
 
-    padding-left: 50px;
     color: white;
 
 }
@@ -54,10 +60,14 @@ input[type=submit] {
     margin-top: 30px;
     font-size: 24px;
     color: #264ECA;
+
+    border: 0;
+    border-radius: 7px;
 }
 
 a {
     align-self: flex-end;
+    text-decoration: none;
 }
 a p{
     color: white;
