@@ -8,6 +8,7 @@
     
     padding-bottom: 180px; /* Pra compensar o padding da logo*/
     
+    min-width: 777px;
 }
 
 .child{
@@ -19,10 +20,10 @@
 }
 
 input[type=text], input[type=password]{
-    width: 400px;
+    width: 500px;
     height: 48px;
     margin-bottom: 20px;
-    padding-top: 9px;
+    padding-top: 5px;
 
     background-color: #264ECA;
     border: 2px solid white;
@@ -33,6 +34,12 @@ input[type=text], input[type=password]{
 
     padding-left: 50px;
     color: white;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+input[type=text]:focus, input[type=password]:focus{
+    outline: none;
 }
 
 ::placeholder{
@@ -46,7 +53,7 @@ input[type=text], input[type=password]{
 .icon-input{
     position: absolute;
     left: 0;
-    top: 5px;
+    top: 7px;
     margin-left: 4px;
 }
 
@@ -55,11 +62,14 @@ input[type=text], input[type=password]{
 }
 
 input[type=submit] {
-    width: 400px;
+    width: 500px;
     height: 48px;
     margin-top: 30px;
-    font-size: 24px;
+
+    font-size: 24px;    
     color: #264ECA;
+    font-weight: bold;
+    letter-spacing: 3px;
 
     border: 0;
     border-radius: 7px;
