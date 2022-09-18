@@ -58,7 +58,6 @@ input[type=submit] {
 
 a {
     align-self: flex-end;
-    text-decoration: none;
 }
 a p{
     color: white;
