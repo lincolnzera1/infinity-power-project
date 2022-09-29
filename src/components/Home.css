@@ -1,3 +1,4 @@
+
 .teste {
     display: flex;
     flex-direction: row;
@@ -9,7 +10,7 @@
     align-items: center; */
 }
 
-.quadrado { 
+.quadrado {
     height: 40vh;
     width: 32%;
     background-color: white;
@@ -21,4 +22,110 @@
     justify-content: center;
 
     border: 3px solid black;
+}
+
+.quadrado-online {
+    height: 40vh;
+    width: 32%;
+    background-color: white;
+    border-radius: 10px;
+    margin: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 6px solid green;
+
+    animation-name: off;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+.quadrado-offline {
+    height: 40vh;
+    width: 32%;
+    background-color: white;
+    border-radius: 10px;
+    margin: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 6px solid red;
+
+    animation-name: on;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes on {
+    from{border-color: red;}
+    to{border-color: green;}
+}
+
+@keyframes off {
+    from{border-color: green;}
+    to{border-color: red;}
+}
+
+
+
+.quadrado-magico { 
+    height: 40vh;
+    width: 32%;
+    background-color: white;
+    border-radius: 10px;
+    margin: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 3px solid black;
+
+    animation-name: popup;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes popup {
+    from {
+        height: 40vh;
+        width: 32%;
+    }
+    to {
+        height: 90vh;
+        width: 100%;
+    }
+}
+
+.quadrado-magico-2 { 
+    height: 90vh;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    margin: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 3px solid black;
+
+    animation-name: popup2;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes popup2 {
+    from {
+        height: 90vh;
+        width: 100%;
+    }
+    to {
+        height: 40vh;
+        width: 32%;
+    }
 }
