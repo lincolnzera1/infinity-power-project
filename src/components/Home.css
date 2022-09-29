@@ -1,0 +1,24 @@
+.teste {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 20px;
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.quadrado { 
+    height: 40vh;
+    width: 32%;
+    background-color: white;
+    border-radius: 10px;
+    margin: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 3px solid black;
+}

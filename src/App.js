@@ -16,6 +16,7 @@ function App() {
           <Route path='/registro' element={<Register />}/>
         </Routes>
       </BrowserRouter>
+      
     </div>
   );
 }
