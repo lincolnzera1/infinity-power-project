@@ -35,7 +35,7 @@
     align-items: center;
     justify-content: center;
 
-    border: 6px solid green;
+    border: 12px solid green;
 
     animation-name: off;
     animation-duration: 2s;
@@ -53,7 +53,7 @@
     align-items: center;
     justify-content: center;
 
-    border: 6px solid red;
+    border: 12px solid red;
 
     animation-name: on;
     animation-duration: 2s;
@@ -62,33 +62,15 @@
 
 @keyframes on {
     from{border-color: red;}
-    to{border-color: green;}
+    to{border-color: greenyellow;}
 }
 
 @keyframes off {
-    from{border-color: green;}
+    from{border-color: greenyellow;}
     to{border-color: red;}
 }
 
 
-
-.quadrado-magico { 
-    height: 40vh;
-    width: 32%;
-    background-color: white;
-    border-radius: 10px;
-    margin: 5px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 3px solid black;
-
-    animation-name: popup;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
-}
 
 @keyframes popup {
     from {
@@ -101,31 +83,3 @@
     }
 }
 
-.quadrado-magico-2 { 
-    height: 90vh;
-    width: 100%;
-    background-color: white;
-    border-radius: 10px;
-    margin: 5px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 3px solid black;
-
-    animation-name: popup2;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
-}
-
-@keyframes popup2 {
-    from {
-        height: 90vh;
-        width: 100%;
-    }
-    to {
-        height: 40vh;
-        width: 32%;
-    }
-}

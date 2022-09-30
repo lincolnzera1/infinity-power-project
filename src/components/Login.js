@@ -68,12 +68,8 @@ const Login = () => {
                     }   
                 }
             }
-            
 
         }).catch((err) => console.log("A error has happened: " + err))
-        
-        
-
     }
 
   return (
