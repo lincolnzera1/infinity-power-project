@@ -2,9 +2,15 @@ import React, { useState } from 'react'
 import './Home.css'
 import Sidebar from './Sidebar'
 
+// react-google-charts
+import { Chart } from 'react-google-charts'
+
 // Modal
 import Modal from 'react-modal'
 Modal.setAppElement("#root")
+
+
+
 
 const Home = () => {
 
@@ -20,8 +26,15 @@ const Home = () => {
       left: "50%",
       right: "auto"
     },
-    
   }
+
+  const data = [
+    ["Task", "Hours per day"],
+    ["Work", 11],
+    ["Eat", 2],
+    ["Watch Tv", 2],
+    ["Sleep", 7]
+  ]
 
     const handleEvent = () => {
 
@@ -47,7 +60,7 @@ const Home = () => {
     <div>
       <button onClick={handleButtonEvent}  >Mudança</button>
       <button onClick={handleOpen}  >MODAL</button>
-
+      
       <div className='teste'>
 
       
@@ -68,6 +81,7 @@ const Home = () => {
           setModal(true)
         }} >
           <p className='quartos' >Quarto {index}</p>
+          
         </button>))
       )}
 
@@ -78,6 +92,15 @@ const Home = () => {
           onRequestClose={handleClose}
         >
           <h1>Bem vindo ao quarto {appear}</h1>
+          
+          <Chart
+            chartType="PieChart"
+            data={data}
+            width="100%"
+            height="400px"
+            legendToggle
+          />
+
         </Modal>  
 
         
