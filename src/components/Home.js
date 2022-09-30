@@ -11,6 +11,7 @@ const Home = () => {
   const [controle, setControle] = useState(true)
   const [isOn, setIsOn] = useState(true)
   const [lista, setLista] = useState([1,2,3,4,5,6,-7,-8,-9]) // se tiver off, recebe um numero negativo do esp.
+  const [appear, setAppear] = useState(false)
 
   const [modal, setModal] = useState(false)
   const customStyles = {
@@ -18,7 +19,8 @@ const Home = () => {
       top: "50%",
       left: "50%",
       right: "auto"
-    }
+    },
+    
   }
 
     const handleEvent = () => {
@@ -42,31 +44,46 @@ const Home = () => {
     }
 
   return (
-    <div className='teste'>
-
+    <div>
       <button onClick={handleButtonEvent}  >Mudança</button>
       <button onClick={handleOpen}  >MODAL</button>
 
-      {lista.map((num) => 
-        (num < 0 ? (<button className="quadrado-online" onClick={handleOpen} ></button>) 
+      <div className='teste'>
+
+      
+      {lista.map((num, index) => 
+        (num % 4 === 0 ? (
+        <button className="quadrado-online" onClick={() => {
+          console.log("Meu numero é o: " + index)
+          setAppear(index)
+          setModal(true)
+        }} >
+          <p className='quartos' >Quarto {index}</p>
+          
+        </button>) 
         : 
-        (<button className="quadrado-offline" onClick={handleOpen} ></button>))
+        (<button className="quadrado-offline" onClick={() => {
+          console.log("Meu numero é o: " + index)
+          setAppear(index)
+          setModal(true)
+        }} >
+          <p className='quartos' >Quarto {index}</p>
+        </button>))
       )}
 
       
 
-      <Modal 
-        isOpen={modal}
-        onRequestClose={handleClose}
-      >
-        <h1>dkqowpdkpoqwdkopwq</h1>
-        <button onClick={handleClose} >gogogo</button>
-        <h2>dqwkopdkopwqkop</h2>
-      </Modal>
+         <Modal 
+          isOpen={modal}
+          onRequestClose={handleClose}
+        >
+          <h1>Bem vindo ao quarto {appear}</h1>
+        </Modal>  
 
         
 
         
+      </div>
     </div>
   )
 }
