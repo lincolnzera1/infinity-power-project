@@ -9,6 +9,7 @@
     overflow-y: visible;
     /* justify-content: center;
     align-items: center; */
+    overflow-y: visible;
 }
 
 .quadrado {
@@ -27,7 +28,6 @@
 
 .quadrado-online {
     background-image: url('https://img.freepik.com/fotos-gratis/interior-pequeno-do-quarto-de-hotel-com-cama-de-casal-e-banheiro_1262-12489.jpg?w=740&t=st=1664562095~exp=1664562695~hmac=6a46512fd8440097c4e6a1c3d1349beb79a75f44b2dca90e4f40f84d8694f672');
-
     height: 40vh;
     width: 32%;
     background-color: white;

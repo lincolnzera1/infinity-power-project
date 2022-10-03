@@ -9,6 +9,9 @@ import { Chart } from 'react-google-charts'
 import Modal from 'react-modal'
 Modal.setAppElement("#root")
 
+
+
+
 const Home = () => {
 
   const [controle, setControle] = useState(true)
@@ -137,7 +140,7 @@ const Home = () => {
         
 
         
-    </div>
+      </div>
   )
 }
 
