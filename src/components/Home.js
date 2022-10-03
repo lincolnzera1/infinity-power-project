@@ -65,7 +65,7 @@ const Home = () => {
 
   const options = {
     hAxis: {
-      title: "Horas/dia",
+      title: "Horas/dia/",
     },
     vAxis: {
       title: "Consumo",
