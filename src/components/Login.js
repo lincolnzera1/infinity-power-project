@@ -67,7 +67,7 @@ const Login = () => {
                         notifyError("Email incorreto!")
                     }   
                 }
-            }
+                }
 
         }).catch((err) => console.log("A error has happened: " + err))
     }
