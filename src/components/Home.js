@@ -14,7 +14,7 @@ Modal.setAppElement("#root")
 
 const Home = () => {
 
-  const [controle, setControle] = useState(true)
+  const [controle, setControle] = useState( true )
   const [isOn, setIsOn] = useState(true)
   const [lista, setLista] = useState([1,2,3,4,5,6,-7,-8,-9]) // se tiver off, recebe um numero negativo do esp.
   const [appear, setAppear] = useState(false)
@@ -96,51 +96,55 @@ const Home = () => {
     }
 
   return (
-    <div className='teste'>
+    <div>
+      <div className="zero">
+        <Sidebar />
+      <div className='teste'>
+        {lista.map((num, index) => 
+          (num < 0 ? (<button className="quadrado-online" onClick={() => {
+            setAppear(index)
+            setStatus("Offline")
+            setModal(true)
+          }} >
+            <p>Quarto {index}</p>
+          </button>) 
+          : 
+          (<button className="quadrado-offline" onClick={() => {
+            setAppear(index)
+            setStatus("Online")
+            setModal(true)
+          }} >
+            <p>Quarto {index}</p>
+          </button>))
+        )}
 
-      {lista.map((num, index) => 
-        (num < 0 ? (<button className="quadrado-online" onClick={() => {
-          setAppear(index)
-          setStatus("Offline")
-          setModal(true)
-        }} >
-          <p>Quarto {index}</p>
-        </button>) 
-        : 
-        (<button className="quadrado-offline" onClick={() => {
-          setAppear(index)
-          setStatus("Online")
-          setModal(true)
-        }} >
-          <p>Quarto {index}</p>
-        </button>))
-      )}
 
-      
 
-      <Modal
-        style={customStyles}
-        isOpen={modal}
-        onRequestClose={handleClose}
-      >
-        <h1>Bem vindo ao quarto {appear}</h1>
-        <h2>Status: {status}</h2>
-        
-        <Chart
-          chartType="LineChart"
-          data={data}
-          width="100%"
-          height="400px"
-          options={options}
-          legendToggle
-        />
+        <Modal
+          style={customStyles}
+          isOpen={modal}
+          onRequestClose={handleClose}
+        >
+          <h1>Bem vindo ao quarto {appear}</h1>
+          <h2>Status: {status}</h2>
+          
+          <Chart
+            chartType="LineChart"
+            data={data}
+            width="100%"
+            height="400px"
+            options={options}
+            legendToggle
+          />
 
-      </Modal>
+        </Modal>
 
-        
+          
 
-        
-      </div>
+          
+        </div>
+    </div>
+    </div>
   )
 }
 

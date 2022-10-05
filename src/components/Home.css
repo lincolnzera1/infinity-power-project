@@ -1,14 +1,29 @@
+.zero {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: auto;
+
+    overflow-y: visible;
+
+    height: 100vh;
+    width: 100%;
+    background-color: white;
+}
+
 
 .teste {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+
+    height: 75%;
+    width: 75%;
     flex-wrap: wrap;
-    align-content: flex-start;
+
     padding: 20px;
-    overflow-y: visible;
-    /* justify-content: center;
-    align-items: center; */
+
     overflow-y: visible;
 }
 
@@ -33,6 +48,7 @@
     background-color: white;
     border-radius: 10px;
     margin: 5px;
+    padding-bottom: 100px;
 
     display: flex;
     align-items: center;
@@ -43,6 +59,10 @@
     animation-name: off;
     animation-duration: 2s;
     animation-fill-mode: forwards;
+
+    color: black;
+    font-size: 30px;
+    font-weight: 900;
 }
 
 .quadrado-offline {
@@ -52,6 +72,7 @@
     background-color: white;
     border-radius: 10px;
     margin: 5px;
+    padding-bottom: 100px;
 
     display: flex;
     align-items: center;
@@ -62,6 +83,10 @@
     animation-name: on;
     animation-duration: 2s;
     animation-fill-mode: forwards;
+
+    color: black;
+    font-size: 30px;
+    font-weight: 900;
 }
 
 @keyframes on {

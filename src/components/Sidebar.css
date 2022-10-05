@@ -20,16 +20,8 @@
 .Sidebar-mini {
     width: 200px;
     height: 100vh;
-    background-color: red;
+    background-color: black;
     animation-name: example;
     animation-duration: 1s;
     animation-fill-mode: forwards;
-}
-
-.circulo {
-    width: 30px;
-    height: 30px;
-    background-color: red;
-    border-radius: 50%;
-    margin: 10px;
 }
