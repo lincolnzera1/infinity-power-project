@@ -19,6 +19,7 @@ const Home = () => {
   const [lista, setLista] = useState([1,2,3,4,5,6,-7,-8,-9]) // se tiver off, recebe um numero negativo do esp.
   const [appear, setAppear] = useState(false)
   const [status, setStatus] = useState("")
+  const [bedroomsOnline, setBedroomsOnline] = useState(0)
 
 
   const [modal, setModal] = useState(false)
@@ -99,40 +100,56 @@ const Home = () => {
     <div>
       <div className="zero">
         <Sidebar />
-      <div className='teste'>
-        {lista.map((num, index) => 
-          (num < 0 ? (<button className="quadrado-online" onClick={() => {
-            setAppear(index)
-            setStatus("Offline")
-            setModal(true)
-          }} >
-            <p>Quarto {index}</p>
-          </button>) 
-          : 
-          (<button className="quadrado-offline" onClick={() => {
-            setAppear(index)
-            setStatus("Online")
-            setModal(true)
-          }} >
-            <p>Quarto {index}</p>
-          </button>))
-        )}
+        <div className="coluna">
+          <div className="linha-dentro-coluna">
+            <div className='quadrado' >
+              <p>Quantidade de quartos</p>
+              <span>{lista.length}</span>
+            </div>
+            <div className="quadrado">
 
+              <p>Quartos Online</p>
+              <span>
+              {lista.filter(nr => nr < 0).length}
+              </span>
 
-
-        <Modal
-          style={customStyles}
-          isOpen={modal}
-          onRequestClose={handleClose}
-        >
-          <h1>Bem vindo ao quarto {appear}</h1>
-          <h2>Status: {status}</h2>
-          
-          <Chart
-            chartType="LineChart"
-            data={data}
-            width="100%"
-            height="400px"
+            </div>
+            <div className="quadrado">
+              <p>Quartos offline</p>
+              <span>{lista.filter(nr => nr > 0).length}</span>
+            </div>
+          </div>
+          <div className='teste'>
+          {lista.map((num, index) => 
+            (num < 0 ? (<button className="quadrado-online" onClick={() => {
+              setAppear(index)
+              setStatus("Offline")
+              setModal(true)
+            }} >
+              <p>Quarto {index}</p>
+            </button>) 
+            : 
+            (<button className="quadrado-offline" onClick={() => {
+              setAppear(index)
+              setStatus("Online")
+              setModal(true)
+            }} >
+              <p>Quarto {index}</p>
+            </button>))
+          )}
+          <Modal
+            style={customStyles}
+            isOpen={modal}
+            onRequestClose={handleClose}
+          >
+            <h1>Bem vindo ao quarto {appear}</h1>
+            <h2>Status: {status}</h2>
+            
+            <Chart
+              chartType="LineChart"
+              data={data}
+              width="100%"
+              height="400px"
             options={options}
             legendToggle
           />
@@ -142,6 +159,7 @@ const Home = () => {
           
 
           
+        </div>
         </div>
     </div>
     </div>

@@ -1,9 +1,11 @@
 .Sidebar {
     width: 200px;
     height: 100vh;
-    background-color: black;
+    color: lightblue;
+    background-color: #25262e;
+
     animation-name: example2;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     animation-fill-mode: forwards;
 }
 
@@ -20,8 +22,8 @@
 .Sidebar-mini {
     width: 200px;
     height: 100vh;
-    background-color: black;
+    background-color: #25262e;
     animation-name: example;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     animation-fill-mode: forwards;
 }

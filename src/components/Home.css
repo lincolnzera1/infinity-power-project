@@ -10,7 +10,7 @@
 
     height: 100vh;
     width: 100%;
-    background-color: white;
+    background-color: #F7F8FC;
 }
 
 
@@ -20,30 +20,59 @@
 
     height: 75%;
     width: 75%;
+    background-color: white;
     flex-wrap: wrap;
 
     padding: 20px;
 
     overflow-y: visible;
+
+    margin-left: 15%;
+}
+
+.coluna {
+    display: flex;
+    flex-direction: column;
+    
+
+    height: 100%;
+    width: 100%;
+
+}
+
+.linha-dentro-coluna {
+    display: flex;
+    flex-direction: row;
 }
 
 .quadrado {
-    height: 40vh;
-    width: 32%;
-    background-color: white;
-    border-radius: 10px;
-    margin: 5px;
-
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 
-    border: 3px solid black;
+    height: 15vh;
+    width: 20%;
+    background-color: white;
+    border: 1px solid lightslategray;
+    border-radius: 10px;
+
+    margin-left: 5%;
+
+    font-weight: bold;
+}
+
+.quadrado p {
+    color: gray;
+}
+
+.quadrado span {
+    font-size: 2.1rem;
 }
 
 .quadrado-online {
     background-image: url('https://img.freepik.com/fotos-gratis/interior-pequeno-do-quarto-de-hotel-com-cama-de-casal-e-banheiro_1262-12489.jpg?w=740&t=st=1664562095~exp=1664562695~hmac=6a46512fd8440097c4e6a1c3d1349beb79a75f44b2dca90e4f40f84d8694f672');
-    height: 40vh;
+    height: 35vh;
     width: 32%;
     background-color: white;
     border-radius: 10px;
@@ -67,7 +96,7 @@
 
 .quadrado-offline {
     background-image: url('https://img.freepik.com/fotos-gratis/interior-pequeno-do-quarto-de-hotel-com-cama-de-casal-e-banheiro_1262-12489.jpg?w=740&t=st=1664562095~exp=1664562695~hmac=6a46512fd8440097c4e6a1c3d1349beb79a75f44b2dca90e4f40f84d8694f672');
-    height: 40vh;
+    height: 35vh;
     width: 32%;
     background-color: white;
     border-radius: 10px;
