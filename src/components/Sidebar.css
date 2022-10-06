@@ -2,7 +2,7 @@
     width: 200px;
     height: 100vh;
     color: lightblue;
-    background-color: #25262e;
+    background-color: #313337;
 
     animation-name: example2;
     animation-duration: 0.5s;
@@ -22,7 +22,7 @@
 .Sidebar-mini {
     width: 200px;
     height: 100vh;
-    background-color: #25262e;
+    background-color: #313337;
     animation-name: example;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;

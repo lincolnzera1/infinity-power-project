@@ -110,56 +110,52 @@ const Home = () => {
 
               <p>Quartos Online</p>
               <span>
-              {lista.filter(nr => nr < 0).length}
+              {lista.filter(nr => nr > 0).length}
               </span>
 
             </div>
             <div className="quadrado">
               <p>Quartos offline</p>
-              <span>{lista.filter(nr => nr > 0).length}</span>
+              <span>{lista.filter(nr => nr < 0).length}</span>
             </div>
           </div>
-          <div className='teste'>
-          {lista.map((num, index) => 
-            (num < 0 ? (<button className="quadrado-online" onClick={() => {
-              setAppear(index)
-              setStatus("Offline")
-              setModal(true)
-            }} >
-              <p>Quarto {index}</p>
-            </button>) 
-            : 
-            (<button className="quadrado-offline" onClick={() => {
-              setAppear(index)
-              setStatus("Online")
-              setModal(true)
-            }} >
-              <p>Quarto {index}</p>
-            </button>))
-          )}
-          <Modal
-            style={customStyles}
-            isOpen={modal}
-            onRequestClose={handleClose}
-          >
-            <h1>Bem vindo ao quarto {appear}</h1>
-            <h2>Status: {status}</h2>
-            
-            <Chart
-              chartType="LineChart"
-              data={data}
-              width="100%"
-              height="400px"
-            options={options}
-            legendToggle
-          />
+          <div className="teste">
+            {lista.map((num, index) => 
+              (num < 0 ? (<button className="quadrado-online" onClick={() => {
+                setAppear(index)
+                setStatus("Offline")
+                setModal(true)
+              }} >
+                <p>Quarto {index}</p>
+              </button>) 
+              : 
+              (<button className="quadrado-offline" onClick={() => {
+                setAppear(index)
+                setStatus("Online")
+                setModal(true)
+              }} >
+                <p>Quarto {index}</p>
+              </button>))
+            )}
+            <Modal
+              style={customStyles}
+              isOpen={modal}
+              onRequestClose={handleClose}
+            >
+              <h1>Bem vindo ao quarto {appear}</h1>
+              <h2>Status: {status}</h2>
+              
+              <Chart
+                chartType="LineChart"
+                data={data}
+                width="100%"
+                height="400px"
+              options={options}
+              legendToggle
+            />
 
-        </Modal>
-
-          
-
-          
-        </div>
+          </Modal>
+          </div>
         </div>
     </div>
     </div>
