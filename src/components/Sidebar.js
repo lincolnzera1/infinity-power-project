@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Sidebar.css'
 import { AiOutlineMenu } from 'react-icons/ai'
+import SidebarContent from './SidebarContent'
 
 const Sidebar = (props) => {
 
@@ -16,7 +17,10 @@ const Sidebar = (props) => {
             
                 
                 {controle ? 
-                    (<div className='Sidebar'><AiOutlineMenu color='white' size={55} onClick={handleEvent} /></div>)
+                    (<div className='Sidebar'>
+                        <AiOutlineMenu color='white' size={55} onClick={handleEvent} />
+                        <SidebarContent />
+                    </div>)
                     :
                     (<div className='Sidebar-mini'><AiOutlineMenu color='white' size={55} onClick={handleEvent} /></div>)}
             
