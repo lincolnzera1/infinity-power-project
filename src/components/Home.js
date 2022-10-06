@@ -16,7 +16,7 @@ const Home = () => {
 
   const [controle, setControle] = useState( true )
   const [isOn, setIsOn] = useState(true)
-  const [lista, setLista] = useState([1,2,3,4,5,6,-7,-8,-9]) // se tiver off, recebe um numero negativo do esp.
+  const [lista, setLista] = useState([1,-2,3,4,-5,6,7,+8,-9]) // se tiver off, recebe um numero negativo do esp.
   const [appear, setAppear] = useState(false)
   const [status, setStatus] = useState("")
   const [bedroomsOnline, setBedroomsOnline] = useState(0)

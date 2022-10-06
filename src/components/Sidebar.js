@@ -19,10 +19,13 @@ const Sidebar = (props) => {
                 {controle ? 
                     (<div className='Sidebar'>
                         <AiOutlineMenu color='white' size={35} onClick={handleEvent} />
-                        <SidebarContent />
+                        <SidebarContent tamanho='grande' />
                     </div>)
                     :
-                    (<div className='Sidebar-mini'><AiOutlineMenu color='white' size={35} onClick={handleEvent} /></div>)}
+                    (<div className='Sidebar-mini'>
+                        <AiOutlineMenu color='white' size={35} onClick={handleEvent} />
+                        <SidebarContent tamanho='pequeno' />
+                    </div>)}
             
             
             
