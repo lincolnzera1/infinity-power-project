@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Home.css'
 import Sidebar from './Sidebar'
 
 // react-google-charts
 import { Chart } from 'react-google-charts'
 
+
+// Axios
+import axios from 'axios'
+
 // Modal
 import Modal from 'react-modal'
 Modal.setAppElement("#root")
+
 
 
 
@@ -95,6 +100,20 @@ const Home = () => {
     const handleOpen = () => {
       setModal(true)
     }
+
+    useEffect(() => {
+      axios.get("https://dqwdwqdwqdwq.herokuapp.com/accounts/").then((response) => {
+        console.log("Everything is ok")
+        //console.log(Object.values(response.data))
+        for(var i in response.data){
+          console.log((response.data)[i].data+ " é o item")
+          setStatus("Offline")
+          
+
+        }
+
+    }).catch((err) => console.log("A error has happened: " + err))
+    }, [])
 
   return (
     <div>
