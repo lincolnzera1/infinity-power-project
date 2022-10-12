@@ -5,6 +5,8 @@ import Sidebar from './Sidebar'
 // react-google-charts
 import { Chart } from 'react-google-charts'
 
+// lodash
+import _ from 'lodash';
 
 // Axios
 import axios from 'axios'
@@ -34,13 +36,8 @@ const Home = () => {
       left: "50%",
       right: "auto",
       marginRight: '-50%',
-      transform: "translate(-50%, -50%)", */
-    }
-  }
-
-  const data = [
-    ["x", "hoje", "ontem"],
-    [0, 0, 0],
+      transform: "translate(-50%, -50%)", 
+      [0, 0, 0],
     [1, 10, 5],
     [2, 23, 15],
     [3, 17, 9],
@@ -64,7 +61,18 @@ const Home = () => {
     [21, 0, 0],
     [22, 0, 0],
     [23, 0, 0],
-    [24, 11, 5],  
+    [24, 11, 5],
+      
+      */
+    }
+  }
+
+
+
+  const [dataList, setDataList] = useState([])
+  const data = [
+    ["x", "hoje", "ontem"],
+      
 
 
   ];
@@ -101,19 +109,54 @@ const Home = () => {
       setModal(true)
     }
 
-    useEffect(() => {
-      axios.get("https://dqwdwqdwqdwq.herokuapp.com/accounts/").then((response) => {
+    const loadData = (data) => {
+      const values = _.groupBy(data, (value) => {
+        return value.dia;
+      })
+
+      console.log('values', values)
+    }
+
+    const getData = async () => {
+
+
+
+      await axios.get("https://dqwdwqdwqdwq.herokuapp.com/accounts/").then((response) => {
+
         console.log("Everything is ok")
         //console.log(Object.values(response.data))
         for(var i in response.data){
-          console.log((response.data)[i].data+ " é o item")
+          //loadData(response.data)
           setStatus("Offline")
+          if(dataList.includes((response.data)[i].data)){
+
+          }else{
+            setDataList([...dataList, (response.data)[i].data])
+            console.log("A lista é: " + dataList)
+            console.log("Novo item: " + (response.data)[i].data)
+          }
           
-
         }
+      }
+    
+    
+      ).catch((err) => console.log("A error has happened: " + err))
+    }
 
-    }).catch((err) => console.log("A error has happened: " + err))
-    }, [])
+    useEffect(() => {
+
+      
+
+      getData()
+
+      
+      // Pega todos os dados a cada 5 segundos
+       const interval = setInterval(() => {
+        getData()
+      }, 5000);
+
+      return () => clearInterval(interval) 
+    },)
 
   return (
     <div>
