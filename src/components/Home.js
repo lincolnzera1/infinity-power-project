@@ -30,6 +30,7 @@ const Home = () => {
 
 
   const [modal, setModal] = useState(false)
+  
   const customStyles = {
     content: {
       /* top: "50%",
@@ -66,6 +67,20 @@ const Home = () => {
       */
     }
   }
+
+  // Pie Chart
+  const pieData = [
+    ["Task", "Hours per Day"],
+    ["Work", 11],
+    ["Eat", 2],
+    ["Commute", 2],
+    ["Watch TV", 2],
+    ["Sleep", 7],
+  ];
+  
+  const pieOptions = {
+    curveType: "function"
+  };
 
 
 
@@ -109,12 +124,29 @@ const Home = () => {
       setModal(true)
     }
 
+    // Chart and loadData
+
+    const [chartData, setChartData] = useState([])
+
     const loadData = (data) => {
       const values = _.groupBy(data, (value) => {
         return value.dia;
       })
 
       console.log('values', values)
+
+      const result = _.map(values, (value, key) => {
+        return [
+          key,
+          _.sumBy(values[key], (v) => parseInt(v.data))
+        ]
+      })
+
+      console.log("result", result)
+
+      return [
+        ["Fabricante", "Consumo/dia"], ...result
+      ]
     }
 
     const getData = async () => {
@@ -125,8 +157,9 @@ const Home = () => {
 
         console.log("Everything is ok")
         //console.log(Object.values(response.data))
-        for(var i in response.data){
-          //loadData(response.data)
+        setChartData(loadData(response.data))
+        /* for(var i in response.data){
+          
           setStatus("Offline")
           if(dataList.includes((response.data)[i].data)){
 
@@ -136,7 +169,7 @@ const Home = () => {
             console.log("Novo item: " + (response.data)[i].data)
           }
           
-        }
+        } */
       }
     
     
@@ -148,7 +181,6 @@ const Home = () => {
       
 
       getData()
-
       
       // Pega todos os dados a cada 5 segundos
        const interval = setInterval(() => {
@@ -156,7 +188,7 @@ const Home = () => {
       }, 5000);
 
       return () => clearInterval(interval) 
-    },)
+    }, [])
 
   return (
     <div>
@@ -209,12 +241,11 @@ const Home = () => {
               
               <Chart
                 chartType="LineChart"
-                data={data}
-                width="100%"
-                height="400px"
-              options={options}
-              legendToggle
-            />
+                data={chartData}
+                options={pieOptions}
+                width={"100%"}
+                height={"400px"}
+              />
 
           </Modal>
           </div>
