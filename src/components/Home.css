@@ -47,9 +47,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 
     padding-top: 10px;
+    margin-bottom: 20px;
 }
 
 
@@ -60,8 +61,8 @@
     align-items: center;
     justify-content: space-evenly;
 
-    height: 15vh;
-    width: 20%;
+    height: 13vh;
+    width: 18%;
     background-color: white;
     border: 1px solid lightslategray;
     border-radius: 10px;
@@ -149,6 +150,29 @@
 }
 
 .modal {
-    background-color: red;
-    height: 400px;
+    text-align: center;
+    font-size: 22px;
+}
+
+
+.modal-azul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    font-size: 24px;
+    text-align: center;
+
+    height: 12vh;
+    width: 20%;
+    background-color: lightblue;
+
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.contain{
+    width: 800px;
+    height: 300px;
 }

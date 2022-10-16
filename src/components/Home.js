@@ -30,9 +30,20 @@ const Home = () => {
 
 
   const [modal, setModal] = useState(false)
+
+  // DATE()
+  var meses = [
+    "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+    "Julho","Agosto",
+    "Setembro","Outubro",
+    "Novembro","Dezembro"
+  ];
+  const mes = new Date().getMonth().toString()
   
   const customStyles = {
     content: {
+      background: "#f5f6f8",
+      padding: "0 150px 50px 150px"
       /* top: "50%",
       left: "50%",
       right: "auto",
@@ -40,6 +51,20 @@ const Home = () => {
       transform: "translate(-50%, -50%)"
       
       */
+     
+    }
+  }
+
+  const pieStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      marginRight: '-50%',
+      transform: "translate(-50%, -50%)",
+    
+      
+     
     }
   }
 
@@ -54,14 +79,53 @@ const Home = () => {
   ];
   
   const pieOptions = {
-    title: "here",
+    title:"Consumo de energia em " + meses[mes],
+    
+    titleTextStyle: {
+      color: 'black',
+      fontSize: 20,
+      alignment: 'center',
+    },
+    
     curveType: "function",
+    legend:{
+      alignment: 'start'
+    },
     hAxis: {
       title: "dia do mês",
+      titleTextStyle: {
+        color: 'black',
+        fontSize: 23,
+        bold: true
+      },
+      minorGridlines: {
+        color: 'red'
+      }
     },
+
     vAxis: {
       title: "Potência em kWh",
+      titleTextStyle: {
+        color: 'gray',
+        fontSize: 23,
+        bold: true
+      },
+      gridlines: {
+        count: 5,
+        color: 'black'
+      }
     },
+    
+    width:"1200",
+    series: {
+      0: {color: 'blue', lineWidth: 4}
+    },
+    trendlines:{
+      0: {
+        color: 'red'
+      }
+    }
+    
   };
 
 
@@ -83,6 +147,7 @@ const Home = () => {
     },
     series: {
       1: { curveType: "function" },
+      
     },
   };
 
@@ -109,25 +174,103 @@ const Home = () => {
     // Chart and loadData
 
     const [chartData, setChartData] = useState([])
+    const [priceChart, setPriceChart] = useState([])
+    const [totalKwh, setTotalKwh] = useState(0)
+    const [priceTotalKwh, setPriceTotalKwh] = useState(0)
+    var cont = 0
+    var contPrice = 0
 
     const loadData = (data) => {
       const values = _.groupBy(data, (value) => {
-        return value.dia;
+        return value.dia
       })
-
-      console.log('values', values)
+      
+      // Essas linhas me ajudaram a pegar o mes de cada dia
+      /* var lista = []
+      for(var i in Object.keys(values)){
+        console.log(Object.keys(values)[i].split(","))
+        lista = lista.concat(Object.keys(values)[i].split(","))
+        
+      }
+      console.log("A lista nesse momento: " , lista) */
+      
 
       const result = _.map(values, (value, key) => {
+
+        // Key já são os dias agrupados
+        // Value são todos os dados do json
+
         return [
-          key,
-          _.sumBy(values[key], (v) => parseInt(v.data))
+          key.split(',', 1)[0],
+          //key.split(",")[1], // Mes que o dado cchegou, caso precise.
+          _.sumBy(values[key], (v) => {
+
+            // Os valores de v são cada linha dos dados, mas no caso ele ta pegando só os "data" no .data
+            //console.log("Valor: " + v.data + " Mês: " + v.mes)
+            
+            return parseInt(v.data)
+          })
+          ,
         ]
       })
 
       console.log("result", result)
+      
+
+      // Pega o valor total dos kwh
+      for(var i in result){
+        console.log("SEU RESULT: " + result[i][1]) 
+        cont += result[i][1]
+      }
+      setTotalKwh(cont)
+      
+      
+      
 
       return [
-        ["Fabricante", "Consumo/dia"], ...result
+        ["dia", "Consumo/dia"], ...result
+      ]
+    }
+    
+
+    const loadPriceData = (data) => {
+      const values = _.groupBy(data, (value) => {
+        console.log("value: ", value.dia, value.mes)
+        return value.dia
+      })
+      console.log('values', Object.keys(values))
+      
+      const result = _.map(values, (value, key) => {
+
+        // Key já são os dias agrupados
+        // Value são todos os dados do json
+
+        return [
+          key,
+          //key.split(",")[1], // Mes que o dado cchegou, caso precise.
+          _.sumBy(values[key], (v) => {
+            // Os valores de v são cada linha dos dados, mas no caso ele ta pegando só os "data" no .data
+            //console.log("Valor: " + v.data + " Mês: " + v.mes)
+
+            return ((parseInt(v.data)/1000)*0.4)*7.3
+          })
+          ,
+        ]
+      })
+
+      //console.log("result", result)
+
+      // Pega o valor total dos kwh em REAIS
+      for(var i in result){
+        console.log("SEU RESULT: " + result[i][1]) 
+        contPrice += result[i][1]
+      }
+      setPriceTotalKwh(contPrice)
+
+      
+
+      return [
+        ["dia", "gasto/dia em R$"], ...result
       ]
     }
 
@@ -141,7 +284,9 @@ const Home = () => {
         //console.log(Object.values(response.data))
         setChartData(loadData(response.data))
 
-        console.log((response.data)[0])
+        setPriceChart(loadPriceData(response.data))
+
+        //console.log((response.data)[0])
         /* for(var i in response.data){
           
           setStatus("Offline")
@@ -169,10 +314,10 @@ const Home = () => {
       // Pega todos os dados a cada 5 segundos
        const interval = setInterval(() => {
         getData()
-      }, 5000);
+      }, 2000000);
 
       return () => clearInterval(interval) 
-    }, [])
+    }, [totalKwh])
 
   return (
     <div>
@@ -196,6 +341,16 @@ const Home = () => {
               <p>Quartos offline</p>
               <span>{lista.filter(nr => nr < 0).length}</span>
             </div>
+              <div className="contain">
+                <Chart
+                  chartType="PieChart"
+                  data={chartData}
+                  options={pieOptions}
+                  width={"100%"}
+                  height={"400px"}          
+                  customStyles={pieStyles}      
+                />
+              </div>
           </div>
           <div className="teste">
             {lista.map((num, index) => 
@@ -220,12 +375,35 @@ const Home = () => {
               isOpen={modal}
               onRequestClose={handleClose}
             >
+             <div className="modal">
               <h1>Bem vindo ao quarto {appear}</h1>
               <h2>Status: {status}</h2>
+             </div>
+
+              <div className="linha-dentro-coluna">
+                <div className="modal-azul">
+                  <h4>Total kWh de {meses[mes]}</h4>
+                  <p>{totalKwh} kWh</p>
+                </div>
+
+                <div className="modal-azul">
+                  <h4>Total gasto de {meses[mes]}</h4>
+                  <p>R$ {priceTotalKwh.toFixed(2)}</p>
+                </div>
+              </div>
               
               <Chart
                 chartType="LineChart"
                 data={chartData}
+                options={pieOptions}
+                width={"100%"}
+                height={"400px"}          
+                customStyles={customStyles}      
+              />
+
+              <Chart
+                chartType="LineChart"
+                data={priceChart}
                 options={pieOptions}
                 width={"100%"}
                 height={"400px"}
