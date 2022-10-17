@@ -78,7 +78,7 @@ const Home = () => {
     ["Sleep", 7],
   ];
   
-  const pieOptions = {
+  const lineOptions = {
     title:"Consumo de energia em " + meses[mes],
     
     titleTextStyle: {
@@ -127,6 +127,12 @@ const Home = () => {
     }
     
   };
+
+
+  const pieOptions = {
+    width: 400,
+
+  }
 
 
 
@@ -184,6 +190,104 @@ const Home = () => {
       const values = _.groupBy(data, (value) => {
         return value.dia
       })
+
+      // Separa em um array os nomes dos esps
+      const espNomes = _.groupBy(data, "identificacao")
+      console.log('esp', espNomes )
+
+      const espDias = _.groupBy(data, "dia")
+      const parte2 = _.map(espDias, (value, key) => {
+        return [
+          key,
+          _.sumBy(espDias[key], (v) => {
+            return parseInt(v.data)
+          }),
+          // aqui eu tenho  que passar o esp1
+        ]
+      })
+
+      console.log('ESPDIAS', parte2)
+      
+    
+      const ah = _.map(espNomes, (value, key) => {
+        console.log('valores: ', espNomes[key])
+
+        // Os valores agruparam os dados dos esps. Agora vou agrupar os dados dos dias já agrupados nos espes
+        //
+        //          O CÓDIGO ABAIXO
+        // /** O codigo abaixo ja pega os os dados agrupados dos esps 1 e 2. */
+        //      Depois ele pega esses dados, e já como o esp1 ja está só com os dados dele, ele pega os dias desse
+        //      esp, e agrupa o dia com o total gasto somente com aquele esp.
+        //      Separando assim, mais ou menos assim:
+        //                                esp1: {
+        //                                  13: 11,
+        //                                  16: 110
+      //                                  },  
+        //                                esp2: {
+        //                                  13: 10,
+        //                                  16: 70,
+        //                                  11: 15    
+      //                                  },  
+        //
+        //
+        //
+        const xis = _.groupBy(espNomes[key], ('dia'))
+        console.log("ARTE AQUI", xis)
+
+        
+        const group = _.map(xis, (value, key) => {
+  
+          return [
+            key.split(',', 1)[0],
+            _.sumBy(xis[key], (v) => {
+              return parseInt(v.data)
+            }),
+          ]
+        })
+
+        console.log(":D ", group)
+        
+      })
+      
+      
+
+      // este código pega os dados de cada esp separado e soma.
+      var sumList = []
+      /* for(let i in espNomes){
+        axios.get("http://localhost:3000/accounts/"+espNomes[i]).then((response) => {
+          console.log("Pq eu passou 3 VEZES AQUI?")
+          var sum = 0
+          
+          for(let j in response.data){
+            //console.log(espNomes[i]+ ": " + response.data[j].data)
+            sum += parseInt(response.data[j].data)
+          }
+          sumList.push(sum)
+
+          const train2 = _.groupBy(response.data, "identificacao")
+
+          const train = _.map(train2, (value, key) => {
+            console.log("CARTA ABERTA:", value)
+
+            return [
+              key,
+              _.sumBy(train2[key], (v) => {
+                return parseInt(v.data)
+              })
+            ]
+
+          })
+
+          console.log("TRAIN", train)
+        })
+      } */
+
+      for(let i in espNomes){
+        axios.get("http://localhost:3000/accounts/"+espNomes[i]).then((response) => {
+          const x = _.groupBy(response.data, "dia")
+          // console.log("BEM vindo aos xmens", x)
+      })
+      }
       
       // Essas linhas me ajudaram a pegar o mes de cada dia
       /* var lista = []
@@ -200,32 +304,48 @@ const Home = () => {
         // Key já são os dias agrupados
         // Value são todos os dados do json
 
+        //console.log("####", values[key][0])
+
+        // values[key] é {(dias agrupados) : "array com tudo"}, vai ter só os dados q tem o esp1 para esp1 e por ai vai.
+        const q = _.sumBy(values[key], (v) => {
+          //console.log("vVvvvvVV", v)
+          
+        })
+
+        
+
+
         return [
+          // Guarda a key e a soma da key em 1 array,
+          // Depois faz isso com outra key e outra soma e guarda em outro array.
+
+
           key.split(',', 1)[0],
           //key.split(",")[1], // Mes que o dado cchegou, caso precise.
+
+          // esse Sumby é tipo um for, percorrendo cada values[key]
           _.sumBy(values[key], (v) => {
 
-            // Os valores de v são cada linha dos dados, mas no caso ele ta pegando só os "data" no .data
+            // Os valores de v são cada linha dos dados, mas no caso ele ta pegando só os "data" no .data,
+            // Inclusive, pega só os dados daquele values[key] especifico.
             //console.log("Valor: " + v.data + " Mês: " + v.mes)
-            
             return parseInt(v.data)
-          })
-          ,
+          }),
+          
+          
+
         ]
+        
       })
 
       console.log("result", result)
       
 
       // Pega o valor total dos kwh
-      for(var i in result){
-        console.log("SEU RESULT: " + result[i][1]) 
+      for(var i in result){ 
         cont += result[i][1]
       }
       setTotalKwh(cont)
-      
-      
-      
 
       return [
         ["dia", "Consumo/dia"], ...result
@@ -235,7 +355,7 @@ const Home = () => {
 
     const loadPriceData = (data) => {
       const values = _.groupBy(data, (value) => {
-        console.log("value: ", value.dia, value.mes)
+        //console.log("value: ", value.dia, value.mes)
         return value.dia
       })
       console.log('values', Object.keys(values))
@@ -262,13 +382,12 @@ const Home = () => {
 
       // Pega o valor total dos kwh em REAIS
       for(var i in result){
-        console.log("SEU RESULT: " + result[i][1]) 
         contPrice += result[i][1]
       }
       setPriceTotalKwh(contPrice)
 
       
-
+      // dia e gasto/dia em r$ são os "titulos", ...result são dados 
       return [
         ["dia", "gasto/dia em R$"], ...result
       ]
@@ -278,7 +397,7 @@ const Home = () => {
 
 
 
-      await axios.get("https://dqwdwqdwqdwq.herokuapp.com/accounts/").then((response) => {
+      await axios.get("http://localhost:3000/accounts").then((response) => {
 
         console.log("Everything is ok")
         //console.log(Object.values(response.data))
@@ -287,23 +406,24 @@ const Home = () => {
         setPriceChart(loadPriceData(response.data))
 
         //console.log((response.data)[0])
-        /* for(var i in response.data){
-          
-          setStatus("Offline")
-          if(dataList.includes((response.data)[i].data)){
 
-          }else{
-            setDataList([...dataList, (response.data)[i].data])
-            console.log("A lista é: " + dataList)
-            console.log("Novo item: " + (response.data)[i].data)
-          }
-          
-        } */
+        // Essas linhas contam quantos esp32's diferentes estão mandando dados.
+        var iList = []
+        for(var i in response.data){
+            if(iList.includes(response.data[i].identificacao)){
+
+            }else{
+              iList.push((response.data)[i].identificacao)
+            }
+        }
+        setDataList(iList)
       }
+      
     
     
       ).catch((err) => console.log("A error has happened: " + err))
     }
+
 
     useEffect(() => {
 
@@ -341,33 +461,23 @@ const Home = () => {
               <p>Quartos offline</p>
               <span>{lista.filter(nr => nr < 0).length}</span>
             </div>
-              <div className="contain">
-                <Chart
-                  chartType="PieChart"
-                  data={chartData}
-                  options={pieOptions}
-                  width={"100%"}
-                  height={"400px"}          
-                  customStyles={pieStyles}      
-                />
-              </div>
           </div>
           <div className="teste">
-            {lista.map((num, index) => 
-              (num < 0 ? (<button className="quadrado-online" onClick={() => {
-                setAppear(index)
+            {dataList.map((num, index) => 
+              (index < 0 ? (<button className="quadrado-online" onClick={() => {
+                setAppear(dataList[index])
                 setStatus("Offline")
                 setModal(true)
               }} >
-                <p>Quarto {index}</p>
+                <p>{dataList}</p>
               </button>) 
               : 
               (<button className="quadrado-offline" onClick={() => {
-                setAppear(index)
+                setAppear(dataList[index])
                 setStatus("Online")
                 setModal(true)
               }} >
-                <p>Quarto {index}</p>
+                <p>{dataList[index]}</p>
               </button>))
             )}
             <Modal
@@ -380,7 +490,7 @@ const Home = () => {
               <h2>Status: {status}</h2>
              </div>
 
-              <div className="linha-dentro-coluna">
+              {/* <div className="linha-dentro-coluna">
                 <div className="modal-azul">
                   <h4>Total kWh de {meses[mes]}</h4>
                   <p>{totalKwh} kWh</p>
@@ -390,24 +500,24 @@ const Home = () => {
                   <h4>Total gasto de {meses[mes]}</h4>
                   <p>R$ {priceTotalKwh.toFixed(2)}</p>
                 </div>
-              </div>
+              </div> */}
               
               <Chart
                 chartType="LineChart"
                 data={chartData}
-                options={pieOptions}
+                options={lineOptions}
                 width={"100%"}
                 height={"400px"}          
                 customStyles={customStyles}      
               />
 
-              <Chart
+              {/* <Chart
                 chartType="LineChart"
                 data={priceChart}
-                options={pieOptions}
+                options={lineOptions}
                 width={"100%"}
                 height={"400px"}
-              />
+              /> */}
 
           </Modal>
           </div>
