@@ -16,7 +16,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: start;
+    justify-content: start;
 
     height: 75%;
     width: 75%;
@@ -175,4 +176,12 @@
 .contain{
     width: 800px;
     height: 300px;
+}
+
+.moda1{
+    
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+      
 }

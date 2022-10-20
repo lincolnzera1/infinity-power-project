@@ -134,14 +134,9 @@ const Home = () => {
 
   }
 
-
-
   const [dataList, setDataList] = useState([])
   const data = [
     ["x", "hoje", "ontem"],
-      
-
-
   ];
 
   const options = {
@@ -442,14 +437,23 @@ const Home = () => {
       return () => clearInterval(interval) 
     }, [totalKwh])
 
+    const [pop, setPop] = useState(false)
+
   return (
     <div>
       <div className="zero">
         <Sidebar />
         <div className="coluna">
+          <div className="modal1">
+            
+          </div>
           <div className="linha-dentro-coluna">
             <div className='quadrado' >
               <p>Quantidade de quartos</p>
+              <button onClick={() => {
+                setPop(true)
+
+              }} >dqokwpkdopwq</button>
               <span>{lista.length}</span>
             </div>
             <div className="quadrado">
@@ -492,9 +496,9 @@ const Home = () => {
               isOpen={modal}
               onRequestClose={handleClose}
             >
-             <div className="modal">
-              <h1>Bem vindo ao quarto {appear}</h1>
-              <h2>Status: {status}</h2>
+             <div >
+              <h2>Bem vindo ao quarto {appear}</h2>
+              <h3>Status: {status}</h3>
              </div>
 
               {/* <div className="linha-dentro-coluna">
