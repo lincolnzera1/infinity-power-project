@@ -116,7 +116,7 @@ const Home = () => {
       }
     },
     
-    width:"1200",
+    //width:"1200",
     series: {
       0: {color: 'blue', lineWidth: 4}
     },
@@ -193,7 +193,7 @@ const Home = () => {
 
       // Separa em um array os nomes dos esps
       const espNomes = _.groupBy(data, "identificacao")
-      console.log('esp', espNomes )
+      console.log('esp', espNomes)
 
       const espDias = _.groupBy(data, "dia")
       const parte2 = _.map(espDias, (value, key) => {
@@ -234,9 +234,10 @@ const Home = () => {
         const xis = _.groupBy(espNomes[key], ('dia'))
         console.log("ARTE AQUI", xis)
 
-        
+        const segura = Object.keys(_.groupBy(data, "identificacao"))
+
+        var cont = 0;
         const group = _.map(xis, (value, key) => {
-  
           return [
             key.split(',', 1)[0],
             _.sumBy(xis[key], (v) => {
@@ -342,6 +343,7 @@ const Home = () => {
       
 
       // Pega o valor total dos kwh
+      // adicionar tambem a informação da indentificação? 
       for(var i in result){ 
         cont += result[i][1]
       }
@@ -394,18 +396,7 @@ const Home = () => {
     }
 
     const getData = async () => {
-
-
-
       await axios.get("http://localhost:3000/accounts").then((response) => {
-
-        console.log("Everything is ok")
-        //console.log(Object.values(response.data))
-        setChartData(loadData(response.data))
-
-        setPriceChart(loadPriceData(response.data))
-
-        //console.log((response.data)[0])
 
         // Essas linhas contam quantos esp32's diferentes estão mandando dados.
         var iList = []
@@ -425,10 +416,22 @@ const Home = () => {
     }
 
 
+    const getEspecificEspData = async (data) => {
+      await axios.get("http://localhost:3000/accounts/"+data.toString()).then((response) => {
+
+        console.log("Everything is ok")
+
+        setChartData(loadData(response.data))
+        setPriceChart(loadPriceData(response.data))
+
+      }).catch((err) => console.log("A error has happened: " + err))
+    }
+
+
     useEffect(() => {
 
       
-
+      // Comentei pois quero que ele carrega os dados ao clicar em um quarto
       getData()
       
       // Pega todos os dados a cada 5 segundos
@@ -468,6 +471,8 @@ const Home = () => {
                 setAppear(dataList[index])
                 setStatus("Offline")
                 setModal(true)
+                console.log("TEU ESP: " + dataList[index])
+                getEspecificEspData(dataList[index])
               }} >
                 <p>{dataList}</p>
               </button>) 
@@ -476,6 +481,8 @@ const Home = () => {
                 setAppear(dataList[index])
                 setStatus("Online")
                 setModal(true)
+                console.log("TEU ESP: " + dataList[index])
+                getEspecificEspData(dataList[index])
               }} >
                 <p>{dataList[index]}</p>
               </button>))
