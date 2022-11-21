@@ -450,10 +450,6 @@ const Home = () => {
           <div className="linha-dentro-coluna">
             <div className='quadrado' >
               <p>Quantidade de quartos</p>
-              <button onClick={() => {
-                setPop(true)
-
-              }} >dqokwpkdopwq</button>
               <span>{lista.length}</span>
             </div>
             <div className="quadrado">

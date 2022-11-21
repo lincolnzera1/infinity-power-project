@@ -9,6 +9,7 @@
     padding-bottom: 180px; /* Pra compensar o padding da logo*/
     
     min-width: 777px;
+    background-color: rgb(35, 31, 32);
 }
 
 .child{
@@ -25,15 +26,15 @@ input[type=text], input[type=password]{
     margin-bottom: 20px;
     padding-top: 5px;
 
-    background-color: #264ECA;
-    border: 2px solid white;
+    background-color: white;
+    border: 2px solid black;
     border-radius: 4px;
 
     font-size: 23px;
     font-weight: bold;
 
     padding-left: 50px;
-    color: white;
+    color: black;
     padding-bottom: 25px;
     padding-top: 25px;
 }
@@ -46,7 +47,7 @@ input[type=text]:focus, input[type=password]:focus{
     font-size: 23px;
     font-weight: bold;
 
-    color: white;
+    color: red;
 
 }
 
@@ -82,4 +83,8 @@ a {
 a p{
     color: white;
     font-size: 24px;
+}
+
+p:hover{
+    color: red;
 }

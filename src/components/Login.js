@@ -78,14 +78,19 @@ const Login = () => {
         <form action="" onSubmit={useHandleSubmit}>
             <div className="child">
                 <div className="inputs">
-                    <HiOutlineMail size={40} color='white' className="icon-input"/>
+                    <HiOutlineMail size={40} color='black' className="icon-input"/>
                     <input type="text" placeholder='E-mail' onChange={(e) => setEmail(e.target.value)}/>
                 </div>
                 <div className="inputs">
                     <input type="password" placeholder='Senha' onChange={(e) => setPassword(e.target.value)}/>
-                    <FaLock size={35} color='white' className='icon-input'/>
+                    <FaLock size={35} color='black' className='icon-input'/>
                 </div>
-                <input type="submit" value='LOGIN'/>
+                <input type="submit" value='LOGIN' className='zoas' onClick={
+                    (a)=>{
+                        navigate('/home')
+                    }
+                }/>
+                
                 <a href="##"><p>Esqueceu a senha?</p></a>
                 <Link to="/registro"><p>Cadastre-se</p></Link>
                 {/* <button onClick={notifySucess}>Clique em mim</button> */}
